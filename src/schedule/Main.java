@@ -1,44 +1,54 @@
 package schedule;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 public class Main {
 
     private static final String REPORT_FILE_NAME = "C:\\Users\\zstow\\Documents\\AshlieApplication\\rotations_report.xls";
     private static final String SCHEDULE_FILE_NAME = "C:\\Users\\zstow\\Documents\\AshlieApplication\\17-18_schedule.xls";
-    private static MasterStorage masterStorage;
+    private static MasterDatabase masterDatabase;
+    private static ArrayList<Block> blocks;
+    private static String year = "2017-2018";
+
 
     public static void main(String[] args) throws IOException {
 
         //Create the storage
-        masterStorage = new MasterStorage();
-
-
-        //Initialize yearly calendars
-        YearlyStorage.createNewSchedule("2017", masterStorage);
-        YearlyStorage.createNewSchedule("2018", masterStorage);
-        YearlyStorage.createNewSchedule("2019", masterStorage);
-        YearlyStorage.createNewSchedule("2020", masterStorage);
+        masterDatabase = MasterDatabase.getInstance();
 
 
 
-        ResidentDB residentDB = new ResidentDB();
-        Spreadsheet residentSheet = new Spreadsheet(REPORT_FILE_NAME);
 
-        //1. Import residents
-        residentSheet.importResidents();
-        //Store residents in DB
 
-        //2. initialize rotation list
-        RotationSchedule rotationSchedule = new RotationSchedule();
-        // Store rotation list in DB
+        // Import residents and store residents in DB
+        //Creates hashmap entries of all residents in the excel file.  Key is class year and value is arraylist
+        //of residents
+        Resident.createResidentTableFromFile(REPORT_FILE_NAME);
 
-        //3. initialize yearly calendars
 
-        //Store yearly calendars in DB
+        // Import and parse excel rotation schedule file
+        //Creates a new hashmap entry of a block table with a key = year and value = arraylist of blocks
+        //Use the year, block names, and dates to create instances of a block for each rotation
+        Block.createBlockTableFromFile(SCHEDULE_FILE_NAME);
 
-        //4. Import and parse excel
+
+        //Initializes a yearly schedule.  Key is year and value is an ArrayList of Schedule Entries.
+        // Schedule entry contains the rotation name as well as an ArrayList consisting of each block for
+        // that yar
+        RotationSchedule.createRotationWithBlocks(year);
+
+
+        //Parse the rest of the excel file
+        ScheduleEntry.fillBlocks(year,SCHEDULE_FILE_NAME);
+
+
+
+
+
+
+
 
     }
 }
@@ -51,15 +61,5 @@ public class Main {
 	//	Spreadsheet spreadsheet = new Spreadsheet("C:\\Users\\zstow\\Documents\\AshlieApplication\\files\\17-18_schedule.xls");
 	//	String[] columns = spreadsheet.getColumnNames();
 		/*
-		MasterStorage masterStorage = new MasterStorage();
-		YearlyStorage.createNewSchedule("2013", masterStorage);
-		YearlyStorage.createNewSchedule("2014", masterStorage);
-		YearlyStorage.createNewSchedule("2015", masterStorage);
-		YearlyStorage.createNewSchedule("2016", masterStorage);
-		YearlyStorage.createNewSchedule("2017", masterStorage);
-		YearlyStorage.createNewSchedule("2018", masterStorage);
-		YearlyStorage.createNewSchedule("2019", masterStorage);
-		YearlyStorage.createNewSchedule("2020", masterStorage);
 
-		masterStorage.printSummary();
 		*/
