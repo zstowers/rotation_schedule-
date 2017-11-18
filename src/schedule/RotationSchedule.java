@@ -19,8 +19,11 @@ public class RotationSchedule  {
     private void initializeRotationList() {
 
         for(RotationNamesEnum name: RotationNamesEnum.values()) {
+
             Rotation rotation = new Rotation(name.rotationName);
+            rotation.setMaxAllowedPerBlock(name.maxAllowed());
             rotations.add(rotation);
+
         }
     }
 

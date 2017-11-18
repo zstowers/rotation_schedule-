@@ -25,7 +25,7 @@ public class Main {
         // Import residents and store residents in DB
         //Creates hashmap entries of all residents in the excel file.  Key is class year and value is arraylist
         //of residents
-        Resident.createResidentTableFromFile(REPORT_FILE_NAME);
+        ResidentDB.createResidentTableFromFile(REPORT_FILE_NAME);
 
 
         // Import and parse excel rotation schedule file
@@ -42,6 +42,8 @@ public class Main {
 
         //Parse the rest of the excel file
         ScheduleEntry.fillBlocks(year,SCHEDULE_FILE_NAME);
+
+        Utilities.printYearlySchedule(year, masterDatabase);
 
 
 

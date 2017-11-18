@@ -1,15 +1,5 @@
 package schedule;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.util.CellAddress;
-import org.apache.poi.ss.util.CellUtil;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class Resident {
 
     private String lastName;
@@ -24,7 +14,7 @@ public class Resident {
         this.classYear = classYear;
     }
 
-
+/*
     public static void createResidentTableFromFile(String fileName) {
 
         MasterDatabase masterDatabase = MasterDatabase.getInstance();
@@ -70,7 +60,7 @@ public class Resident {
         return newResident;
     }
 
-
+*/
     public String getFirstName() {
         return this.firstName;
     }

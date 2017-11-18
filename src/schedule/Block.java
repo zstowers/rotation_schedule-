@@ -14,7 +14,7 @@ public class Block {
     private String startDate;
     private String endDate;
     private String year;
-    private ArrayList<Resident> residents;
+    private ArrayList<ResidentBlockEntry> residentEntry;
 
 
 
@@ -24,7 +24,7 @@ public class Block {
         this.startDate = startDate;
         this.endDate = endDate;
         this.year = year;
-        this.residents = new ArrayList<Resident>();
+        this.residentEntry = new ArrayList<ResidentBlockEntry>();
     }
 
     public static void createBlockTableFromFile(String fileName) {
@@ -67,6 +67,14 @@ public class Block {
 
     public String getYear() {
         return this.year;
+    }
+
+    public  ArrayList<ResidentBlockEntry> getResidentEntry() {
+        return this.residentEntry;
+    }
+
+    public void addResident(ResidentBlockEntry entry) {
+        this.residentEntry.add(entry);
     }
 
 
