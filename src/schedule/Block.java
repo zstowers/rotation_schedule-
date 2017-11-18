@@ -31,6 +31,7 @@ public class Block {
 
         ArrayList<Block> blockTable = new ArrayList<Block>();
         MasterDatabase masterDatabase = MasterDatabase.getInstance();
+      //  DBConnect dbConnection = DBConnect.getInstance();
 
         HSSFWorkbook workBook = Spreadsheet.getWorkBook(fileName);
         HSSFSheet workSheet = workBook.getSheetAt(0);
@@ -46,10 +47,11 @@ public class Block {
             String[] dates = dateRange.split(" - ");
             Block newBlock = new Block(blockName, dates[0], dates[1], scheduleYear );
             blockTable.add(newBlock);
+         //   dbConnection.addBlock(newBlock);
         }
 
         masterDatabase.getBlockMap().put(scheduleYear, blockTable);
-      //  return blockTable;
+
     }
 
 

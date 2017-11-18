@@ -18,13 +18,27 @@ public class RotationSchedule  {
 
     private void initializeRotationList() {
 
+
+
         for(RotationNamesEnum name: RotationNamesEnum.values()) {
 
             Rotation rotation = new Rotation(name.rotationName);
             rotation.setMaxAllowedPerBlock(name.maxAllowed());
             rotations.add(rotation);
+        }
+    }
+
+    public static void addRotationsToDB() {
+        DBConnect dbConnection = DBConnect.getInstance();
+
+        for(RotationNamesEnum name: RotationNamesEnum.values()) {
+
+            Rotation rotation = new Rotation(name.rotationName);
+            rotation.setMaxAllowedPerBlock(name.maxAllowed());
+            dbConnection.addRotation(rotation);
 
         }
+
     }
 
     public static void createRotationWithBlocks(String year) {

@@ -57,8 +57,10 @@ public class ResidentDB {
 
 
     public static Resident createNewResident(String residentName, String classYear) {
+      //  DBConnect dbConnection = DBConnect.getInstance();
         String[] fullName = residentName.split(", ");
         Resident newResident = new Resident(fullName[1], fullName[0], classYear);
+      //  dbConnection.addResident(newResident);
         return newResident;
     }
 
